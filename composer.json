@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.0.22",
+      "laravel/framework": "5.0.5",
         "artisaninweb/laravel-soap": "0.2.*",
       "smalot/magento-client": "*"
 

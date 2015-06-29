@@ -14,14 +14,31 @@ Route::get('get-started', 'HomeController@index');
 
 Route::get('/',  'HomeController@index');
 
-//Route::get('api/category{$id}/', 'MagentoApiController@getProductsByCategory');
+Route::get('api/products/category/{id}', 'MagentoApiController@getProductsByCategoryId');
+Route::get('/api/categories',  'MagentoApiController@getAllCategories');
+Route::get('/api/categoryNames',  'MagentoApiController@getCategoryNames');
+/* get the list for the drop down */
+Route::get('/api/categorylist',  'MagentoApiController@getCategoryList');
 
-Route::get('/api/categories',  'MagentoApiController@getCategoryNames');
+
+
+// get-started
+
+// get-started/step/1
+// get-started/step/2
+// get-started/step/3
+
+// get-started/step/4
+// get-started/thanks
+// get-started/send
+
+
+
+// contact-us
+
+//
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-
-//Route::get('/api/category/{$id}', 'MagentoApiController@getProductsByCategory');
-Route::get('/api/category/{$cid}' , array('as' => 'api.category', 'uses' => 'MagentoApiController@getProductsByCategory'));
