@@ -80,20 +80,34 @@ class MagentoApiController extends Controller {
 
         $this->product_queue = new \Smalot\Magento\MultiCallQueue($this->adapter);
         $this->productManager = new \Smalot\Magento\Catalog\Product( $this->adapter );
+        $this->productMediaManager = new \Smalot\Magento\Catalog\ProductMedia( $this->adapter );
         $categoryManager = new \Smalot\Magento\Catalog\Category( $this->adapter );
         $products  = $categoryManager->getAssignedProducts( $id )->execute();
+
+
+
+
         foreach($products as $product){
             $this->getProductDetails($product);
+            $this->getProductURL($product);
         }
 
 //
         $product_details = $this->product_queue->execute();
+
+
+
+
         return $product_details;
 
     }
 
+    public function getProductURL($product){
+            $this->productMediaManager->getList( $product['product_id'] )->addToQueue( $this->product_queue, array($this->adapter, 'ProductURL') );
+    }
+
     public function getProductDetails($product){
-            $this->productManager->getInfo( $product['product_id'] )->addToQueue( $this->product_queue );
+            $this->productManager->getInfo( $product['product_id'] )->addToQueue( $this->product_queue, array($this->adapter, 'ProductDetails') );
     }
 
 
